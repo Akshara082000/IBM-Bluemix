@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>IBMHACKATHON</title>
+     <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css')}}">
+     <link rel="stylesheet" href="{{ url_for('static',filename='css/map.css')}}">
+     <link rel="stylesheet" href="{{ url_for('static',filename='css/display.css')}}">
+     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+     <script src="{{ url_for('static', filename='js/script.js') }}"></script>	
+     <!--<script src="{{ url_for('static', filename='js/charts.js') }}"></script> -->   
+     <script>
+            
+        $(document).ready(function () {
+            $('.charts').hide();
+            $('#graph1').show();
+            $('#select').change(function () {
+            $('.charts').hide();
+            $('#graph'+$(this).val()).show();
+          }); 
+         });
+ </script>
+    </head>
+    <body>
+        {% block body %}
+        <div id="container">
+            
+             <div id="contents">
+                <div id="Location">
+                    <div id="coor"> 
+                    <p>Pictorial Representation Of Twitter Sentiment Analysis Of Tweets Fetched From the Location: </p>
+                    <label for="">Langitude:</label>{{lang}}<br><br>
+                    <label>Latitude:</label>{{lat}}<br><br>
+                    <div id="button">
+                      <a href='/map'>Back</a>
+                    </div>
+                </div>
+                </div>
+                <div id="graphs">
+                   
+                {% if ERROR_MSG=="Found" %}
+                    <div class='options'>
+                    <select id="select" name="cd-dropdown" class="cd-select">
+                        <option value="1" class="Pie"selected>Pie</option>
+                        <option value="2" class="Gauge">Gauge</option>
+                        <option value="3" class="WordCloud">WordCloud</option>
+                        <option value="4" class="WordFrequency">WordFrequency</option>
+                     </select>
+                    </div>
+                    <div id="graph1" class="charts"></div>
+                    <div id="graph2" class="charts">
+                        <div id="posgauge" ></div>
+                        <div id="neggauge" ></div>
+                    </div>
+                    <div id="graph3" class="charts"></div>
+                    <div id="graph4" class="charts"> </div>
+
+                {% else %}
+                   <div class="Errormsg">
+                    <img src="https://media.tenor.com/images/e805dffed0c1a9d3d5f04056bd83e863/tenor.gif"><br>
+                    <span>Sorry,We could not fetch any tweets from the location.</span><br>
+                    <span>Try Searching Some Other Locations nearby.</span><br>
+                   </div>
+                {% endif %}
+                </div>
+           
+             </div>
+        </div>
+       
+        <script>
+'{% if ERROR_MSG == "Found" %}'
+var data = JSON.parse('{{ data | tojson | safe}}');
+var data = [{
+  values: [data['Positive'],data['Negative']],
+  labels: ['positive','negative'],
+  type: 'pie'
+}];
+
+var layout = {
+  height: 400,
+  width: 500,
+  paper_bgcolor: "#161616",
+};
+
+Plotly.newPlot('graph1', data, layout);
+
+
+ /** Function to display gauges  */
+
+</script>
+<script>
+ var data = JSON.parse('{{ data | tojson | safe}}');
+ var pos=data["Positive"];
+ var data = [
+    {
+       type: "indicator",
+       mode: "gauge+number+delta",
+       value: pos,
+title: { text: "Positive Tweets Percentage", font: { size: 24 } },
+delta: { reference: 100, increasing: { color: "RebeccaPurple" } },
+gauge: {
+axis: { range: [null, 100], tickwidth: 1, tickcolor: "#3366cc" },
+bar: { color: "#3366CC" },
+bgcolor: "white",
+borderwidth: 2,
+bordercolor: "gray",
+steps: [
+{ range: [0, 50], color: "cyan" },
+{ range: [50, 100], color: "cyan" }
+],
+threshold: {
+line: { color: "red", width: 4 },
+thickness: 0.75,
+value: 90
+}
+}
+}
+];
+
+var layout = {
+width: 400,
+height: 300,
+margin: { t: 25, r: 25, l: 25, b: 25 },
+paper_bgcolor: "#161616",
+font: { color: "#3366CC", family: "Arial" }
+};
+
+Plotly.newPlot('posgauge', data, layout);
+
+</script>
+<script>
+var data = JSON.parse('{{ data | tojson | safe}}');
+var neg=data["Negative"];
+var data = [
+   {
+      type: "indicator",
+      mode: "gauge+number+delta",
+      value: neg,
+title: { text: "Negative Tweeets Percentage", font: { size: 24 } },
+delta: { reference: 100, increasing: { color: "RebeccaPurple" } },
+gauge: {
+axis: { range: [null, 100], tickwidth: 1, tickcolor: "#3366cc" },
+bar: { color: "#3366CC" },
+bgcolor: "white",
+borderwidth: 2,
+bordercolor: "gray",
+steps: [
+{ range: [0, 50], color: "cyan" },
+{ range: [50, 100], color: "cyan" }
+],
+threshold: {
+line: { color: "red", width: 4 },
+thickness: 0.75,
+value: 90
+}
+}
+}
+];
+
+var layout = {
+width: 400,
+height: 300,
+margin: { t: 25, r: 25, l: 25, b: 25 },
+paper_bgcolor: "#161616",
+font: { color: "#3366CC", family: "Arial" }
+};
+
+Plotly.newPlot('neggauge', data, layout);
+
+        </script>
+        <script>
+             let values=[]
+             var count=0
+             let freq=[]
+            '{% for key,values in words.items() %}'
+                
+                    if(count!=30){
+                       values.push('{{values}}')
+                       count=count+1;
+                    }
+            '{% endfor %}'
+            count=0
+            '{% for key,values in freq.items() %}'
+                
+                if(count!=30){
+                   freq.push('{{values}}')
+                   count=count+1;
+                }
+        '{% endfor %}'
+
+            console.log(values);
+            console.log(freq)
+            $(document).ready(function(){
+                var entries= values.map(x => ({label:x,url:"https://twitter.com/search?q="+x}));
+                var settings = {
+                    entries :entries,
+                    width:640,
+                    height:400,
+                    radius:'65%',
+                    radiusMin:75,
+                    bgDraw:true,
+                    bgColor:'#161616',
+                    opacityOver:1.00,
+                    opacitySpeed:6,
+                    fov:800,
+                    speed:2,
+                    fontFamily:'Courier,Arial,sans-serif',
+                    fontSize:'30',
+                    fontColor:'white',
+                    fontWeight:'bold',
+                    fontStyle:'normal',
+                    fontToUppercase:true,
+                };
+                $('#graph3').svg3DTagCloud(settings)
+            });
+           
+            var data = [
+                  {
+                     x: values,
+                     y: freq,
+                     type: 'bar',
+                     bgcolor: "black",
+                  }
+              ];
+            
+              var layout = {
+                      width: 800,
+                      height: 400,
+                      paper_bgcolor: "#161616",
+                      
+                      font: { color: "white", family: "Arial" }
+                  };
+      Plotly.newPlot('graph4', data,layout);
+      '{%endif%}'
+        </script>
+
+       {% endblock %}
+    </body> 
+    
+</html>
+  
