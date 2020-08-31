@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>IBMHACKATHON</title>
+     <!-- <script src="{{ url_for('static', filename='js/dataset.js') }}"></script>-->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css')}}">
+    </head>
+    <body>
+    <div id="parent">
+       <div id="content">
+           <div class="content-1">
+                <div class="heading">
+                     <h2>Look What <br>the <mark>World</mark> is <mark>Thinking</mark></h2>
+                </div>
+                <div class="para">
+                     <p>This website allows you to see the emotions of the people around the world with just a click on the map.You can hear through the twitter about Lockdown,Covid-19 and many more.</p>
+                </div>
+                <div class="button">
+                     <a href="{{url_for('map')}}">Get Started</a>
+                </div>
+           </div>
+           <div class="content-2">                 
+                <h3>@ibmhackathon2020 @covid-19</h3>
+           </div>
+      
+    </div>
+    </div>
+    </body>
+</html>

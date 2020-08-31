@@ -1,0 +1,73 @@
+#container{
+    display:flex;
+    margin:4%;
+}
+#contents{
+    height:650px;
+    width:1400px;
+    background-color:#161616;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+#map{
+    height: 650px;
+    width:800px;
+    background-color: blue;
+}
+#coordinates{
+    margin-left:5%;
+    color:Black;
+    display:grid;
+    grid-template-rows:auto auto ;
+}
+.cord-1{
+    height: min-content;
+}
+.cord-2{
+    align-content: center;
+    margin-top: -50px;
+    margin-left: 21%;
+}
+p{
+    font-size: 20px;
+    font-family: sankrit text;
+    color:white;
+}
+span{
+    font-size: 15px;
+    color:white;
+}
+input{
+    background-color: #2D2D2D;
+    padding: 10px;
+    border-radius: 15px;
+    height:25px;
+    width:200px;
+    color:white;
+    margin-top:5px;
+    font-family: Poppins;
+}
+button{
+    
+    border:1px solid #484DEF;
+    border-radius: 5%;
+    color:white;
+    font-family: poppins;
+    padding:20px;
+    margin-left:8% ;
+    margin-top:3%;
+    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#loader{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    position: absolute;
+    margin-left: 35%;
+    margin-top: 20%;
+    font-weight: 500px;
+    justify-content: center;
+    align-items: center;
+    background-color: white; 
+    display: none;
+}

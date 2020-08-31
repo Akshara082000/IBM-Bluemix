@@ -1,0 +1,120 @@
+html{
+    background: url(map.jpg) no-repeat center center fixed;
+    height:100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+     -webkit-animation: backgroundScroll 5s linear infinite;
+     animation-play-state: running;
+     animation: backgroundScroll 5s linear infinite;
+    
+}
+@keyframes backgroundScroll {
+    from {background-position: 0 0;}
+
+
+}
+@-webkit-keyframes backgroundScroll {
+    from {background-position: 0 0;}
+    100%{
+        animation-direction:alternate-reverse;
+    }
+}
+
+
+
+#parent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8%;
+    margin-bottom: 7%;  
+}
+#content{
+    height: 500px;
+    width:1000px;
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.content-1{
+    width:900px;
+    background-color:#161616;
+    background-size: 900px 900px;  
+   
+    box-sizing: border-box;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    row-gap: 2px;
+}
+.heading,.para,.button{
+    margin-left: 5%;
+    text-align: left;
+    color:white;
+    max-height: min-content;
+}
+.heading{
+    font-family: sankrit text;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 40px;
+    text-align: left;
+    color:white;   
+    margin-bottom: -120px;
+}
+
+mark{
+    text-decoration: none;
+    background-color: inherit;
+    color:#7DC9FA;
+}
+.para{
+    font-family: IBM Plex Sans ;
+    font-weight: lighter;
+    font-size: 15px;
+    color: white;
+    margin-bottom: -110px;
+}
+.button a{
+    font-size: 30px;
+    color:white;
+    text-decoration: none;
+    font-weight: bolder;
+    background: #2193b0;  /* fallback for old browsers */
+    border-radius: 15px;
+    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 15px;
+    position: relative;
+    top:30px;
+    
+}
+.button a:visited{
+    text-decoration: none;
+}
+
+.content-2{
+    width:100px;
+    border-radius: 10px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background: #2193b0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h3{    
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: bold;
+        color: #FFFFFF;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        writing-mode: vertical-lr;
+        -ms-writing-mode: tb-lr;
+        transform: rotate(180deg);
+ }
